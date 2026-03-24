@@ -78,19 +78,116 @@
   .stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Ccircle cx='50' cy='80' r='1' fill='white' opacity='.4'/%3E%3Ccircle cx='150' cy='30' r='1.5' fill='white' opacity='.3'/%3E%3Ccircle cx='300' cy='100' r='1' fill='white' opacity='.5'/%3E%3Ccircle cx='450' cy='50' r='1' fill='white' opacity='.3'/%3E%3Ccircle cx='530' cy='200' r='1.5' fill='white' opacity='.4'/%3E%3Ccircle cx='80' cy='300' r='1' fill='white' opacity='.2'/%3E%3Ccircle cx='200' cy='400' r='1.5' fill='white' opacity='.3'/%3E%3Ccircle cx='400' cy='350' r='1' fill='white' opacity='.5'/%3E%3Ccircle cx='560' cy='420' r='1' fill='white' opacity='.3'/%3E%3Ccircle cx='100' cy='500' r='1.5' fill='white' opacity='.4'/%3E%3Ccircle cx='350' cy='530' r='1' fill='white' opacity='.3'/%3E%3Ccircle cx='480' cy='580' r='1' fill='white' opacity='.5'/%3E%3C/svg%3E"); }
   .container { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
   header { text-align: center; margin-bottom: 2.5rem; position: relative; }
-  .title { font-family: 'Orbitron', sans-serif; font-size: clamp(1.6rem, 5vw, 2.8rem); font-weight: 900; background: linear-gradient(135deg, var(--accent2), var(--accent), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: 2px; filter: drop-shadow(0 0 30px rgba(139,92,246,0.3)); }
-  .subtitle { margin-top: 0.4rem; color: var(--muted); font-size: 0.85rem; letter-spacing: 3px; text-transform: uppercase; }
+  
+  /* ----- VERBESSERTER TITEL mit 3D-Text und Glow ----- */
+  .title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1.8rem, 6vw, 3.2rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--accent2), var(--accent), var(--gold), #FFE6B0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: 3px;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.3), 0 5px 15px rgba(139,92,246,0.4), 0 8px 20px rgba(0,0,0,0.5);
+    animation: titlePulse 3s infinite ease-in-out;
+    transform: translateZ(0);
+  }
+  @keyframes titlePulse {
+    0% { text-shadow: 0 2px 5px rgba(0,0,0,0.3), 0 5px 15px rgba(139,92,246,0.4), 0 8px 20px rgba(0,0,0,0.5); }
+    50% { text-shadow: 0 2px 8px rgba(0,0,0,0.4), 0 8px 25px rgba(199, 120, 221, 0.7), 0 12px 30px rgba(0,0,0,0.6); }
+    100% { text-shadow: 0 2px 5px rgba(0,0,0,0.3), 0 5px 15px rgba(139,92,246,0.4), 0 8px 20px rgba(0,0,0,0.5); }
+  }
+  .subtitle {
+    margin-top: 0.6rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, var(--accent2), var(--muted));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 500;
+  }
 
   /* MODE SELECTION (Now 2 items per row) */
   #mode-phase { animation: fadeIn 0.5s ease; }
-  .mode-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 1.5rem; }
-  @media (max-width: 600px) { .mode-grid { grid-template-columns: 1fr; } }
+  .mode-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.8rem; margin-top: 1.5rem; }
+  @media (max-width: 600px) { .mode-grid { grid-template-columns: 1fr; gap: 1.2rem; } }
   
-  .mode-btn { background: var(--bg2); border: 2px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 2rem 1.5rem; text-align: center; cursor: pointer; transition: all 0.3s; color: var(--text); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; }
-  .mode-btn:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); background: var(--bg3); }
-  .mode-icon { font-size: 3.5rem; }
-  .mode-btn h3 { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; color: var(--accent2); letter-spacing: 1px; }
-  .mode-btn p { font-size: 0.85rem; color: var(--muted); line-height: 1.4; margin: 0; }
+  /* ----- AUFGEWERTETE MODUS-KACHELN ----- */
+  .mode-btn {
+    background: linear-gradient(145deg, var(--bg2), var(--bg3));
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 28px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    box-shadow: 0 12px 25px -8px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.08);
+    backdrop-filter: blur(2px);
+    position: relative;
+    overflow: hidden;
+  }
+  .mode-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 80%);
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .mode-btn:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: var(--accent2);
+    box-shadow: 0 20px 35px -10px rgba(0,0,0,0.6), inset 0 1px 2px rgba(255,255,255,0.2), 0 0 0 1px rgba(139,92,246,0.3);
+    background: linear-gradient(145deg, var(--bg3), var(--bg2));
+  }
+  .mode-btn:active {
+    transform: translateY(-2px) scale(0.99);
+    transition: 0.05s;
+  }
+  .mode-icon {
+    font-size: 3.8rem;
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.4));
+    transition: transform 0.25s ease;
+  }
+  .mode-btn:hover .mode-icon {
+    transform: scale(1.05) rotate(2deg);
+  }
+  .mode-btn h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    color: var(--accent2);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, var(--accent2), var(--gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 800;
+  }
+  .mode-btn p {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.5;
+    margin: 0;
+    max-width: 220px;
+  }
+  .mode-btn:hover p {
+    color: var(--text);
+    transition: color 0.2s;
+  }
 
   /* SETUP */
   #setup-phase { display: none; animation: fadeIn 0.5s ease; }
@@ -848,20 +945,17 @@ cvs.addEventListener('touchmove', (e) => {
 }, {passive: false});
 
 function drawForest(ctx, w, h, frame) {
-  // Himmel
   const grad = ctx.createLinearGradient(0, 0, 0, h);
   grad.addColorStop(0, '#6ba5b0');
   grad.addColorStop(0.7, '#2f6b47');
   ctx.fillStyle = grad;
   ctx.fillRect(0, 0, w, h);
-  // Boden mit Gras
   ctx.fillStyle = '#3c2a1f';
   ctx.fillRect(0, h-35, w, 35);
   ctx.fillStyle = '#5e3a1f';
   for(let i=0; i<20; i++) {
     ctx.fillRect(i*50, h-38, 25, 8);
   }
-  // Bäume (mit sanfter Bewegung)
   for(let i=0; i<12; i++) {
     let x = (i*70 + frame*0.2) % (w+100) - 50;
     ctx.fillStyle = '#5e3a1f';
@@ -869,7 +963,6 @@ function drawForest(ctx, w, h, frame) {
     ctx.fillStyle = '#2b5e2b';
     ctx.beginPath(); ctx.moveTo(x-12, h-85); ctx.lineTo(x+6, h-130); ctx.lineTo(x+24, h-85); ctx.fill();
   }
-  // Fliegende Blätter
   for(let i=0; i<12; i++) {
     let fx = (frame*1.2 + i*70) % (w+100) - 50;
     let fy = h-60 + Math.sin(frame*0.02 + i)*15;
@@ -882,17 +975,14 @@ function drawBird(ctx, x, y, angle, wingPhase) {
   ctx.save();
   ctx.translate(x, y);
   ctx.rotate(angle);
-  // Körper
   ctx.fillStyle = '#b5651e';
   ctx.beginPath();
   ctx.ellipse(0, 0, 14, 10, 0, 0, Math.PI*2);
   ctx.fill();
-  // Kopf
   ctx.fillStyle = '#e0a878';
   ctx.beginPath();
   ctx.arc(10, -4, 7, 0, Math.PI*2);
   ctx.fill();
-  // Auge mit Glanz
   ctx.fillStyle = '#000';
   ctx.beginPath();
   ctx.arc(13, -6, 1.8, 0, Math.PI*2);
@@ -901,18 +991,15 @@ function drawBird(ctx, x, y, angle, wingPhase) {
   ctx.beginPath();
   ctx.arc(13.5, -6.8, 0.5, 0, Math.PI*2);
   ctx.fill();
-  // Schnabel
   ctx.fillStyle = '#e06c1e';
   ctx.beginPath();
   ctx.moveTo(18, -6); ctx.lineTo(25, -4); ctx.lineTo(18, -2); ctx.fill();
-  // Flügel (flapping)
   ctx.fillStyle = '#a55a1a';
   ctx.save();
   ctx.translate(-6, -2);
   ctx.rotate(Math.sin(wingPhase) * 0.7);
   ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(-16, -4); ctx.lineTo(-10, 4); ctx.fill();
   ctx.restore();
-  // Schwanz
   ctx.fillStyle = '#8b4513';
   ctx.beginPath(); ctx.moveTo(-12, 0); ctx.lineTo(-22, -2); ctx.lineTo(-22, 2); ctx.fill();
   ctx.restore();
@@ -924,11 +1011,9 @@ function drawEnhancedObstacle(ctx, obs) {
   ctx.rotate(obs.angle);
   ctx.shadowBlur = 15;
   ctx.shadowColor = obs.game.color[1];
-  // Äußerer Glow
   ctx.beginPath(); ctx.arc(0, 0, obs.radius+4, 0, Math.PI*2);
   ctx.fillStyle = `rgba(255,215,0,0.2)`;
   ctx.fill();
-  // Hauptkörper mit Verlauf
   let grad = ctx.createRadialGradient(-5, -5, 5, 0, 0, obs.radius);
   grad.addColorStop(0, obs.game.color[0]);
   grad.addColorStop(1, obs.game.color[1]);
@@ -938,11 +1023,9 @@ function drawEnhancedObstacle(ctx, obs) {
   ctx.strokeStyle = "rgba(255,255,200,0.7)";
   ctx.lineWidth = 3;
   ctx.stroke();
-  // Innerer Glanz
   ctx.beginPath(); ctx.arc(-3, -3, obs.radius*0.3, 0, Math.PI*2);
   ctx.fillStyle = `rgba(255,255,255,0.5)`;
   ctx.fill();
-  // Icon
   ctx.shadowBlur = 0;
   ctx.font = `28px "Segoe UI Emoji"`;
   ctx.textAlign = "center";
@@ -950,8 +1033,6 @@ function drawEnhancedObstacle(ctx, obs) {
   ctx.fillStyle = "#fff";
   ctx.fillText(obs.game.icon, 0, 0);
   ctx.restore();
-  
-  // Spielname unterhalb (ohne Rotation)
   ctx.font = 'bold 12px "Orbitron"';
   ctx.fillStyle = '#f0f0f0';
   ctx.textAlign = 'center';
@@ -970,10 +1051,8 @@ function birdLoop() {
     const ctx = cvs.getContext('2d');
     ctx.clearRect(0, 0, cvs.width, cvs.height);
     
-    // Hintergrund zeichnen (ohne Shake für die Kollision)
     drawForest(ctx, cvs.width, cvs.height, birdFrames);
     
-    // Bewegung (sanft)
     let moveSpeed = 3.8;
     let oldY = birdY;
     if (keyState.w || keyState.ArrowUp) birdY -= moveSpeed;
@@ -984,16 +1063,12 @@ function birdLoop() {
     
     let birdAngle = (birdY - oldY) * 0.06;
     
-    // LANG SAMER DIFFICULTY-ANSTIEG (0.00012 pro Frame) – nach 60 Sekunden spürbar schwerer
-    birdDifficulty += 0.00012;  // ca. 0,0072 pro Minute -> nach 5 min ca. 1.036, nach 10 min 1.072 – sanft aber unendlich
-    if (birdDifficulty > 3.5) birdDifficulty = 3.5; // weiches soft cap, aber immer noch schwer
+    birdDifficulty += 0.00012;
+    if (birdDifficulty > 3.5) birdDifficulty = 3.5;
     birdFrames++;
     birdScore = Math.floor(birdFrames / 7);
-    
-    // Wing-Animation
     wingAngle += 0.18;
     
-    // Bildschirmwackeln nach 1 Minute (3600 Frames)
     if (birdFrames > 3600) {
         shakeOffsetX = (Math.random() - 0.5) * 5;
         shakeOffsetY = (Math.random() - 0.5) * 4;
@@ -1002,14 +1077,11 @@ function birdLoop() {
         shakeOffsetY = 0;
     }
     
-    // Shake auf gesamte Zeichnung anwenden
     ctx.save();
     ctx.translate(shakeOffsetX, shakeOffsetY);
     
-    // Vogel zeichnen
     drawBird(ctx, birdX_Fixed, birdY, birdAngle, wingAngle);
     
-    // Hindernisse erzeugen (Start langsam, dann dichter)
     let spawnDelay = Math.max(32, Math.floor(95 / birdDifficulty));
     if (birdFrames % spawnDelay === 0 && birdFrames > 20) {
         const gameTarget = games[Math.floor(Math.random() * games.length)];
@@ -1017,14 +1089,13 @@ function birdLoop() {
             x: cvs.width + 60, 
             y: Math.random() * (cvs.height - 85) + 45, 
             radius: 34, 
-            speed: (1.9 + Math.random() * 2.2) * birdDifficulty,  // Basis langsamer
+            speed: (1.9 + Math.random() * 2.2) * birdDifficulty,
             game: gameTarget,
             angle: 0,
             spinSpeed: (Math.random() - 0.5) * 0.06
         });
     }
     
-    // Hindernisse aktualisieren und zeichnen
     for (let i = obstacles.length - 1; i >= 0; i--) {
         let obs = obstacles[i]; 
         obs.x -= obs.speed;
@@ -1032,7 +1103,6 @@ function birdLoop() {
         
         drawEnhancedObstacle(ctx, obs);
         
-        // Kollision (ohne Shake-Versatz)
         const dx = birdX_Fixed - obs.x; const dy = birdY - obs.y;
         const dist = Math.sqrt(dx*dx + dy*dy);
         if (dist < obs.radius + 16) {
@@ -1044,7 +1114,6 @@ function birdLoop() {
         if (obs.x < -80) obstacles.splice(i, 1);
     }
     
-    // Score & Highscore
     ctx.font = 'bold 20px "Orbitron"';
     ctx.textAlign = 'right';
     ctx.fillStyle = 'var(--gold)';
@@ -1053,7 +1122,7 @@ function birdLoop() {
     ctx.fillStyle = 'var(--muted)';
     ctx.fillText(`HIGH: ${getBirdHighscore()}`, cvs.width - 20, 65);
     
-    ctx.restore();  // Ende Shake
+    ctx.restore();
     
     requestAnimationFrame(birdLoop);
 }
